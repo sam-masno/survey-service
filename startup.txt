@@ -1,3 +1,8 @@
+create base express server: npm init, npm install express:
+    const express = require('express');
+    const app = express();
+    app.get('/', (req,res) => res.send('message'));
+    app.listen(process.env.PORT || 5000);
 use dynamic port binding for listening port: app.listen(process.env.PORT || 5000)
 
 for heroku deployment modify package.json to specify node -v:"engines": {"node":"VERSION IN USE", "npm":"VERSION IN USE"}
@@ -5,3 +10,20 @@ for heroku deployment modify package.json to specify node -v:"engines": {"node":
 create .gitignore and add node_modules
 
 include "start":"node app.js" in package.json.scripts
+
+make commit with base code
+
+install heroku cli: 
+    sudo curl https://cli-assets.heroku.com/install.sh | sh
+
+login in via browser/cli: 
+    heroku login
+
+add remote repository to current git: 
+    git remote add heroku <git.heroku>
+
+push to heroku: 
+    git push heroku master
+
+open project:
+    heroku open
