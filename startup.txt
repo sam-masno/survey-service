@@ -1,0 +1,7 @@
+use dynamic port binding for listening port: app.listen(process.env.PORT || 5000)
+
+for heroku deployment modify package.json to specify node -v:"engines": {"node":"VERSION IN USE", "npm":"VERSION IN USE"}
+
+create .gitignore and add node_modules
+
+include "start":"node app.js" in package.json.scripts

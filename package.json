@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "mern stack project for a paid email survey service",
   "main": "app.js",
+  "engines":{
+    "node":"12.14.1",
+    "npm":"6.13.4"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node app.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
