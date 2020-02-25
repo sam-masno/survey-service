@@ -3,16 +3,22 @@
   "version": "1.0.0",
   "description": "mern stack project for a paid email survey service",
   "main": "app.js",
-  "engines":{
-    "node":"12.14.1",
-    "npm":"6.13.4"
+  "engines": {
+    "node": "12.14.1",
+    "npm": "6.13.4"
   },
   "scripts": {
-    "start":"node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "cookie-session": "^1.4.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
   }
 }

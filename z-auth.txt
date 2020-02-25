@@ -1,0 +1,51 @@
+### authorization using passport ###
+
+    npm install --save passport
+    npm install --save -passport-google-oauth20
+
+starting all logic in app.js and refactoring later
+
+include in app.js:
+    const passport = require('passport');
+    const GoogleStrategy = require('passport-google-oauth20').Strategy
+
+use google strategy object in passport:
+    passport.use(new GoogleStrategy())
+
+on google dev console, create client Id and record id and secret. store in config/keys.js and add to .gitignore and require to app.js. user urls http://localhost:5000 and http://localhost:5000/auth/google for dev
+    const keys = require('./config/keys');
+
+pass clientId into GoogleStrategy object with call back route property and callback function:
+    passport.use(new GoogleStrategy({
+        clientID: keys.googleClientID,
+        clientSecret: keys.googleClientSecret,
+        callbackURL: '/auth/google/callback'
+        },
+        (accessToken) => {
+            console.log(accessToken)
+        })
+    )
+
+add endpoint to initiate auth, pass passport as a callback using authenticate method with desired scopes:
+    app.get('/auth/google', passport.authenticate('google', {scopes: ['profile', 'email']}));
+
+on approval, redirect will go to specified callback url and will contain auth code for accessing scopes.
+the endpoint of the redirect will finish process using passport again:
+    app.get('/auth/google/callback', passport.authenticate('google'));
+
+##Factoring out app.js 
+move all passport keys and require statements to services/passport.js.
+to ensure file runs on startup add to app.js:
+    require('./services/passort.js')
+
+
+move get routes to routes/authRoutes.js. to authRoutes modify to require passport and wrap routes in arrow function and export:
+    const passport = require('passport');
+    module.exports = (app) => {
+        ...route info
+    }
+
+to attach routes to app object require authRoutes in app.js and pass app to authRoutes function:
+    const authRoutes = require('./routes/authRoutes');
+    ...app.js
+    authRoutes(app);

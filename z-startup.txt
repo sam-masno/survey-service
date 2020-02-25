@@ -22,7 +22,7 @@ login in via browser/cli:
 add remote repository to current git: 
     git remote add heroku <git.heroku>
 
-push to heroku: 
+push to heroku (also used for redeployment): 
     git push heroku master
 
 open project:
