@@ -2,9 +2,14 @@ const express = require('express');
 const keys = require('./config/keys.js');
 const cookieSession = require('cookie-session');
 const passport = require('passport')
+const bodyParser = require('body-parser');
 
 //create express server object
 const app = express();
+
+//use bodyparser middleware
+app.use(bodyParser.json());
+
 //apply cookie sessions
 app.use(
     cookieSession({
@@ -21,10 +26,18 @@ require('./models/User.js');
 //run passport config
 require('./services/passport.js');
 
-app.get('/', (req,res)=> res.send('home'));
-
 //import and invoke route attachment function on app
 require('./routes/authRoutes.js')(app);
+require('./routes/billingRoutes.js')(app);
+
+//serve client in production 
+if (process.env.NODE_ENV === 'production' ) {
+    app.use(express.static('client/build'));
+    const path = require('path');
+    app.use('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+}
 
 
 app.listen(process.env.PORT || 5000);

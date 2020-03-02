@@ -24,10 +24,10 @@ passport.use(new GoogleStrategy(
         proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-        try {
+
             const checkForUser = await User.findOne( { googleID: profile.id } );
             if(checkForUser) {
-                console.log('user exists')
+                // console.log('user exists')
                 done(null, checkForUser);
             }
             else {
@@ -35,12 +35,9 @@ passport.use(new GoogleStrategy(
                     googleID: profile.id,
                     name: profile.displayName,
                 }); 
-                console.log(newUser)
+                // console.log(newUser)
                 done(null, newUser)
             } 
-        } catch (error) {
-            console.log(error)
-        }
 
   
     }   
