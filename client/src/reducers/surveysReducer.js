@@ -1,12 +1,12 @@
 import { 
-    FETCH_USER
+    FETCH_SURVEYS
 } from '../actions/types';
 
 //use default state as null to use as simple loading switch
-export default (state = null, action) => {
+export default (state = [], action) => {
     switch(action.type) {
-        case FETCH_USER: 
-            return action.payload || false
+        case FETCH_SURVEYS: 
+            return action.payload
         default:
             return state
     }

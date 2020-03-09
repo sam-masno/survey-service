@@ -1,9 +1,12 @@
 import React from 'react';
+//testing
+// import axios from 'axios';
 
 const Landing = () => {
+
     return (
         <div className="center-align section">
-            test new landing
+            <h1>Landing Works</h1>
         </div>
     );
 }

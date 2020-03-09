@@ -40,7 +40,7 @@ const Header = ({ auth }) => {
     }
 
     return (
-        <nav className="grey">
+        <nav className="blue">
             <div className="container">
                 <div className="nav-wrapper">
                     

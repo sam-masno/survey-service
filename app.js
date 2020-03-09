@@ -20,15 +20,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 //run db config service and models
-require('./services/db.js');
-require('./models/User.js');
+require('./services/db');
+require('./models/User');
+require('./models/Survey');
+require('./models/Recipient');
 
 //run passport config
 require('./services/passport.js');
 
 //import and invoke route attachment function on app
-require('./routes/authRoutes.js')(app);
-require('./routes/billingRoutes.js')(app);
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 //serve client in production 
 if (process.env.NODE_ENV === 'production' ) {

@@ -10,25 +10,29 @@ import 'materialize-css/dist/css/materialize.min.css';
 //components
 import Header from './Header';
 import Landing from './Landing';
+import Dashboard from './Dashboard';
+import SurveyNew from './surveys/SurveyNew'
 
-const Dashboard = () => <h1>Dashboard works</h1>
-const SurveyNew = () => <h1>SurveyNew works</h1>
+//testing
+// import axios from 'axios';
+// window.axios = axios;
 
-const App = ({fetchUser}) => {
-    useEffect(() => {
+
+const App = ({fetchUser }) => {
+    useEffect( () => {
         fetchUser();
     }, [])
     return (
         <div>
             <BrowserRouter>
                 <Header />
-                <div className="container">
-                    <Switch>
-                        <Route exact path="/" component={Landing} /> 
-                        <Route exact path="/surveys" component={Dashboard} />
-                        <Route exact path="/surveys/new" component={SurveyNew} />
-                    </Switch>
-                </div>
+                    <div className="container">
+                        <Switch>
+                            <Route exact path="/" component={Landing} /> 
+                            <Route exact path="/surveys" component={Dashboard} />
+                            <Route exact path="/surveys/new" component={SurveyNew} />
+                        </Switch>
+                    </div>
             </BrowserRouter>
         </div>
     )
