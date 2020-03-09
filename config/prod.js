@@ -6,5 +6,5 @@ module.exports = {
     stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     stripeSecretKey:process.env.STRIPE_SECRET_KEY,
     sendgridKey: process.env.SEND_GRID_KEY,
-    emailLink: process.eventNames.EMAIL_LINK
+    emailLink: process.env.EMAIL_LINK
 }
