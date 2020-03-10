@@ -14,7 +14,7 @@ const Header = ({ auth }) => {
             case null:
                 return ''
             case false: 
-                return <li><a href="/auth/google" className="red">Sign in with Google</a></li>             
+                return <li><a href="/auth/google" className="red white-text">Sign in with Google</a></li>             
             default:
                 return (
                     <Fragment>

@@ -43,6 +43,9 @@ const SurveyList = ({ surveys, fetchSurveys, deleteSurvey }) => {
             <Fragment>
                 <h3 className="center">You dont have any surveys</h3>
                 <h6 className="center">Click on the red button to send out a survey and see the results here.</h6>
+                <h6 className="blue-text center">** To buy Credits, enter card no. "4242 4242 4242 4242" in purchase form **</h6>
+                <h6 className="blue-text center">** Purchase process is only a test procedure, no charges are made **</h6>
+
             </Fragment>
         )
     }
