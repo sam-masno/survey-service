@@ -9,6 +9,8 @@ export const validateRecipients = emails => {
     
     if(invalidEmails.length){
         return `The following emails are invalid: ${invalidEmails}`
+    } else if (emails.split(',').filter(email => email).length > 5) {
+        return 'Please limit recipients list to 5 emails or less.'
     }
     return null
 }
