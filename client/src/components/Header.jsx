@@ -14,22 +14,25 @@ const Header = ({ auth }) => {
             case null:
                 return ''
             case false: 
-                return <li><a href="/auth/google">Sign in with Google</a></li>             
+                return <li><a href="/auth/google" className="red">Sign in with Google</a></li>             
             default:
                 return (
                     <Fragment>
                         <li>
-                            <StripePay />
-                        </li>
-                        <li>
-                            <a >
-                            Credits: { auth.credits }
-                            </a>
-                        </li>
-                        <li>
                             <Link to="/surveys">
                                 { auth.name }
-                            </Link>                            
+                            </Link> 
+                        </li>
+                        <li>   
+                            <a>
+                                <StripePay />
+                            </a>                         
+                        </li>
+                        <li>
+
+                            <a >
+                            Credits: { auth.credits }
+                            </a>                           
                         </li>
                         <li>
                             <a href="/auth/logout" >Logout</a>
@@ -40,23 +43,26 @@ const Header = ({ auth }) => {
     }
 
     return (
-        <nav className="blue">
-            <div className="container">
-                <div className="nav-wrapper">
-                    
-                    <Link 
-                        to={auth ? '/surveys' : '/'  } 
-                        className="left brand-logo"
-                     >
-                         Survey junky
-                    </Link >
-
-                    <ul className="right">
-                        <Action />
-                    </ul>
-                </div>
+        <Fragment>
+            <nav className="blue">
+            <div className="nav-wrapper container">
+                <Link 
+                    to={auth ? '/surveys' : '/'  } 
+                    className=" brand-logo "
+                >
+                    TalkBack
+                  </Link >
+            <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+            <ul className="right hide-on-med-and-down">
+                <Action />
+            </ul>
             </div>
         </nav>
+        
+        <ul className="sidenav" id="mobile-demo">
+            <Action />
+        </ul>     
+      </Fragment >   
     )
 }
 

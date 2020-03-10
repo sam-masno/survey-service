@@ -23,11 +23,12 @@ module.exports = (app) => {
     })
 
     app.post('/api/surveys', requireLogin, checkCredit, async (req, res) => {
-        const { title, body, recipients, subject } = req.body;
+        const { title, body, recipients, subject, from } = req.body;
         const survey = new Survey({
             _user: req.user.id,
             title,
             body,
+            from,
             subject,
             recipients: recipients.split(',').map(email => ({ email: email.trim() })),
             dateSent: Date.now()
@@ -82,11 +83,19 @@ module.exports = (app) => {
         res.status(202).send('ok');
     })
 
-    app.get('/api/surveys/:id/yes', (req, res) => {
-        res.send(`${req.params.id} yes`)
-    })
-
-    app.get('/api/surveys/:id/no', (req, res) => {
-        res.send(`${req.originalUrl} no`)
+    app.delete('/api/surveys/:surveyId', requireLogin, async (req, res) => {
+        const { surveyId } = req.params;
+        const survey = await Survey.findOne({_id: surveyId}).select('-recipients')
+        //check if survey exists
+        if(!survey) {
+            res.status(404).send({error: 'Resource not found.'})
+        }
+        //match user to survey
+        else if(survey._user != req.user.id) {
+            res.status(401).send({error: 'Not authorized.'})
+        }
+        //delete survey
+        await Survey.findByIdAndDelete(surveyId)
+        res.status(200).send({message: 'Resource deleted'})
     })
 }

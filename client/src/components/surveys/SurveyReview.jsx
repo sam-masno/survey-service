@@ -2,6 +2,8 @@ import React, { Fragment, useHistory } from 'react';
 import FIELDS from './formFields';
 import { withRouter } from 'react-router';
 
+import M from 'materialize-css';
+
 //redux stuff
 import { connect } from 'react-redux';
 import { submitSurvey } from '../../actions';
@@ -16,7 +18,10 @@ const SurveyReview = ({onCancel, survey, submitSurvey, history}) => {
     ))
 
     const handleSubmit = () => {
-        submitSurvey(survey, history)
+        M.toast({html: "Sending...", classes: 'green'})
+        const res = submitSurvey(survey, history)
+        if(res) M.toast({html:"Success!", classes: 'green'})
+        else M.toast({html:"Error. Please try again."})
     }
 
     return (

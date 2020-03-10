@@ -1,7 +1,7 @@
 const sendgrid = require('@sendgrid/mail');
 sendgrid.setApiKey(require('../config/keys').sendgridKey)
 
-const mailService = async ( { body, recipients, subject }, content ) => {
+const mailService = async ( { body, recipients, subject, from }, content ) => {
 
     //convert recipients objects array into array of just emails
     const mailList = recipients.map(({email}) => email);
@@ -9,7 +9,7 @@ const mailService = async ( { body, recipients, subject }, content ) => {
     //construct message with inserting survey properties and template
     const msg = {
         to: mailList,
-        from: 'no-reply@example.com',
+        from,
         subject: subject,
         text: body,
         html: content

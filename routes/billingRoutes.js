@@ -11,8 +11,14 @@ module.exports = app => {
             description: 'buy credits',
             source: req.body.id
         })
-        req.user.credits += 5;
-        const user = await req.user.save();
-        res.send(user)
+        if(charge.paid) {
+            try {
+                req.user.credits += 5;
+                const user = await req.user.save();
+                res.send(user)  
+            } catch (error) {
+                res.status(400).send({error: 'There was an error, please contact customer service'})
+            }
+        } else res.status(400).send({error: 'Payment failed'})
     })
 }

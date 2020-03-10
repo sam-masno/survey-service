@@ -8,7 +8,7 @@ import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
 
 //email validator
-import validateEmails  from '../../utils/validateEmails';
+import { validateRecipients, validateFrom }  from '../../utils/validateEmails';
 
 //form fields
 import FIELDS from './formFields.js'
@@ -27,7 +27,9 @@ const SurveyForm = ({onReview, handleSubmit}) => {
                         label={label} 
                         component={SurveyField}
                     />  
-                ))}                                                         
+                ))}   
+                <p className="blue-text">Note: Enter emails seperated by " , ".</p>                                       
+                <br/>               
                 <Link to="/surveys" className="btn-flat white-text red">Cancel</Link>
                 <button className="btn btn-flat blue white-text right" type="submit">
                     Review
@@ -44,7 +46,8 @@ function validate(values) {
     FIELDS.forEach(({name}) => {
         if(!values[name]) errors[name] = 'Field required.'
     })
-    if(values.recipients) errors.recipients = validateEmails(values.recipients)
+    if(values.from) errors.from = validateFrom(values.from)
+    if(values.recipients) errors.recipients = validateRecipients(values.recipients)
     return errors;
 } 
 
